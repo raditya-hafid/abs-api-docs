@@ -10,6 +10,11 @@
             "url": "http:\/\/localhost:8000\/api"
         }
     ],
+    "security": [
+        {
+            "http": []
+        }
+    ],
     "paths": {
         "\/admin\/petugas\/{petuga}\/deactivate": {
             "put": {
@@ -498,96 +503,6 @@
                 }
             }
         },
-        "\/verify-nasabah\/{token}": {
-            "get": {
-                "operationId": "auth.verifyEmail",
-                "tags": [
-                    "Auth"
-                ],
-                "parameters": [
-                    {
-                        "name": "token",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application\/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "const": "Email berhasil diverifikasi. Akun Anda sekarang aktif."
-                                        }
-                                    },
-                                    "required": [
-                                        "message"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "",
-                        "content": {
-                            "application\/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "const": "Token verifikasi tidak valid."
-                                        }
-                                    },
-                                    "required": [
-                                        "message"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "\/logout": {
-            "post": {
-                "operationId": "auth.logout",
-                "tags": [
-                    "Auth"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application\/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "const": "Logout berhasil"
-                                        }
-                                    },
-                                    "required": [
-                                        "message"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
-                    }
-                }
-            }
-        },
         "\/login": {
             "post": {
                 "operationId": "auth.login",
@@ -822,6 +737,96 @@
                     },
                     "422": {
                         "$ref": "#\/components\/responses\/ValidationException"
+                    }
+                }
+            }
+        },
+        "\/verify-nasabah\/{token}": {
+            "get": {
+                "operationId": "auth.verifyEmail",
+                "tags": [
+                    "Auth"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "const": "Email berhasil diverifikasi. Akun Anda sekarang aktif."
+                                        }
+                                    },
+                                    "required": [
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "const": "Token verifikasi tidak valid."
+                                        }
+                                    },
+                                    "required": [
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/logout": {
+            "post": {
+                "operationId": "auth.logout",
+                "tags": [
+                    "Auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "const": "Logout berhasil"
+                                        }
+                                    },
+                                    "required": [
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/AuthenticationException"
                     }
                 }
             }
@@ -3035,6 +3040,46 @@
                 }
             }
         },
+        "\/petugas\/cetak-laporan\/excel": {
+            "get": {
+                "operationId": "laporan.exportExcel",
+                "description": "\u26a0\ufe0f Cannot generate request documentation: Interface \"Maatwebsite\\Excel\\Concerns\\WithMultipleSheets\" not found",
+                "tags": [
+                    "Laporan"
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "\/petugas\/cetak-laporan\/pdf": {
+            "get": {
+                "operationId": "laporan.exportPdf",
+                "tags": [
+                    "Laporan"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/AuthenticationException"
+                    }
+                }
+            }
+        },
         "\/petugas\/penimbangan": {
             "post": {
                 "operationId": "penimbangan.penimbangan",
@@ -4080,6 +4125,59 @@
                 }
             }
         },
+        "\/pengepul\/export-pembelian\/excel\/{pengepul_id}": {
+            "get": {
+                "operationId": "requestPembelian.exportExcel",
+                "description": "\u26a0\ufe0f Cannot generate request documentation: Interface \"Maatwebsite\\Excel\\Concerns\\FromCollection\" not found",
+                "tags": [
+                    "RequestPembelian"
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "\/pengepul\/export-pembelian\/pdf\/{transaksi_id}": {
+            "get": {
+                "operationId": "requestPembelian.exportPdf",
+                "tags": [
+                    "RequestPembelian"
+                ],
+                "parameters": [
+                    {
+                        "name": "transaksi_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/ModelNotFoundException"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/AuthenticationException"
+                    }
+                }
+            }
+        },
         "\/nasabah\/request-penarikan": {
             "post": {
                 "operationId": "requestPenarikan.store",
@@ -4983,6 +5081,12 @@
         }
     },
     "components": {
+        "securitySchemes": {
+            "http": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        },
         "schemas": {
             "Admin": {
                 "type": "object",
@@ -5944,25 +6048,6 @@
             }
         },
         "responses": {
-            "AuthenticationException": {
-                "description": "Unauthenticated",
-                "content": {
-                    "application\/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "message": {
-                                    "type": "string",
-                                    "description": "Error overview."
-                                }
-                            },
-                            "required": [
-                                "message"
-                            ]
-                        }
-                    }
-                }
-            },
             "ValidationException": {
                 "description": "Validation error",
                 "content": {
@@ -5988,6 +6073,25 @@
                             "required": [
                                 "message",
                                 "errors"
+                            ]
+                        }
+                    }
+                }
+            },
+            "AuthenticationException": {
+                "description": "Unauthenticated",
+                "content": {
+                    "application\/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "description": "Error overview."
+                                }
+                            },
+                            "required": [
+                                "message"
                             ]
                         }
                     }
